@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title>Getting Sensors Online</title>
+		<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.1.js"></script>
+		<script src  = "static/js/main.js"></script>
+	</head>
+	<body onload="keepAlive(); time();">
+
+		<h1>Online</h1>
+		<h2>Connection: <span id="Connection_id">...</span></h2>
+		<h2>Motion: <span id="Motion_id">...</span></h2>
+		<div>
+			<input type="checkbox" id="buzzer" onclick="handleClick(this);"/>
+			<label for = "Buzzer_On">Buzzer On</label>
+		</div>
+	</body>
+	<button onClick = logout()>Logout</button>
+
+	<div>
+		{% if user_id == '115286914554441662160' %}
+
+		<h2>Logged In Users</h2>
+		<ul>
+			{% for user in online_users["user_record"] %}
+			<li>
+				<span>{{user[0]}}</span>
+				<input type="checkbox" id="read-user-{{user[1]}}" {{user[2]}}>Read</input>
+				<input type="checkbox" id="write-user-{{user[1]}}" {{user[3]}}>Write</input>
+				<button id="access-user-{{user[1]}}" onClick=grantAccess(this)>Apply</button>
+			</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+	</div>
+</html>
